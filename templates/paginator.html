@@ -1,0 +1,22 @@
+{% load сustom_tags %}
+{% if object_list.has_other_pages %}
+    <nav class="pagination" aria-label="Search results pages">
+        <ul class="pagination__container">
+            {% if object_list.has_previous %}
+            <li class="pagination__item"><a class="pagination__link link" href="?{% presave_params page=object_list.previous_page_number %}"><span class="icon-left"></span></a></li>
+            {% endif %}
+                {% for i in object_list.paginator.page_range %}
+                    {% if i <= object_list.number|add:1 and i >= object_list.number|add:-1 %}
+                        {% if i == object_list.number %}
+                        <li class="pagination__item pagination__item_active"><a class="pagination__link link" href="?{% presave_params page=forloop.counter %}"> {{forloop.counter}} </a></li>
+                        {% else %}
+                        <li class="pagination__item"><a class="pagination__link link" href="?{% presave_params page=forloop.counter %}"> {{ forloop.counter }} </a></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% if object_list.has_next %}
+            <li class="pagination__item"><a class="pagination__link link" href="?{% presave_params page=object_list.next_page_number %}"><span class="icon-right"></span></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

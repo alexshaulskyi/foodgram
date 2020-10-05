@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Мои подписки</title>
+{% endblock %}
+
+{% block style %}
+{% load static сustom_tags %}
+<link rel="stylesheet" href="{% static 'pages/myFollow.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="header">
+    {% include 'auth_nav.html' %}
+</header>
+<main class="main container">
+<div class="main__header">
+    <h1 class="main__title">Мои подписки</h1>
+</div>
+{% csrf_token %}
+<div class="card-list">
+    {% for author in object_list %}
+    <div class="card-user" data-id="{{ author.id }}">
+        <div class="card-user__header">
+            <h2 class="card-user__title"> {{ author.first_name }} </h2>
+        </div>
+        <div class="card-user__body">
+            <ul class="card-user__items">
+                {% for recipe in author.recipes.all %}
+                    {% if forloop.counter0 < 3 %}
+                    <li class="card-user__item">
+                        <div class="recipe">
+                            <img src="{{ recipe.image.url }}" alt="Картинка рецепта" class="recipe__image">
+                            <h3 class="recipe__title"> {{ recipe.name }} </h3>
+                            <p class="recipe__text"><span class="icon-time"></span> {{ recipe.cooking_time }} мин.</p>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                <li class="card-user__item">
+                    {% with amount=author|count_recipes %}
+                        {% if amount %}
+                        <a href="{% url 'detail_author' author.username %}" class="card-user__link link"> Еще {{ amount }} рецептов... </a>
+                        {% else %}
+                        <a href="{% url 'detail_author' author.username %}" class="card-user__link link"> Страница автора </a>
+                        {% endif %}
+                    {% endwith %}
+                </li>
+            </ul>
+        </div>
+        <div class="card-user__footer">
+            <button class="button button_style_light-blue button_size_auto" name="subscribe" data-out>Отписаться</button>
+        </div> 
+    </div>
+    {% endfor %}
+</div>
+    {% include 'paginator.html' with object_list=object_list %}
+</main>
+<footer class="footer">
+{% include 'footer.html' %}
+</footer>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/components/MainCards.js' %}"></script>
+<script src="{% static 'js/components/MyFollow.js' %}"></script>
+<script src="{% static 'js/components/Subscribe.js' %}"></script>
+<script src="{% static 'js/components/Header.js' %}"></script>
+<script src="{% static 'js/api/Api.js' %}"></script>
+<script src="{% static 'myFollow.js' %}"></script>
+{% endblock %}
