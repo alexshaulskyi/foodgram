@@ -8,9 +8,13 @@ others how.
 
 #### Usage
 
-The application is stored in 3 separated docker containers one of which contains
-Postgresql, another one for Django project itself and the last one for Nginx.
-Comes with a json which includes around 2k of ingredients which you can use by
-executing ```python manage.py loaddata ingredients.json``` in web container.
+The application is running in 3 containers one of which contains PostgreSQL, another
+one for Django and the last one for Nginx. In order to run application you need to
+create an ```.env``` file with PostgreSQL settings:
 
-[I'm an inline-style link with title](https://www.ashowlskyfoodgram.tk "foodgram")
+```DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=supersecretpw
+DB_HOST=db
+DB_PORT=5432
+```
