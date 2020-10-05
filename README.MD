@@ -1,4 +1,4 @@
-![example workflow name](https://github.com/alexandrshaulskyi/foodgram-project/workflows/foodgram_workflow/badge.svg)
+![example workflow name](https://github.com/alexshaulskyi/foodgram/workflows/foodgram_workflow/badge.svg)
 
 ### Foodgram
 
