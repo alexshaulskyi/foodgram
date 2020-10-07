@@ -24,6 +24,8 @@ If you want to use default ```sqlite``` DB in development just uncomment respect
 in ```settings.py``` file. Do not forget to uncomment ```STATICFILES_DIRS``` and switch ```DEBUG``` to ```True```
 in order to serve static files properly in development.
 
+Includes ```json`` with around 2k ingredients. Use on your own will.
+
 #### Description
 
 The application allows to post recipes which contain information about ingredients, required cooking time
